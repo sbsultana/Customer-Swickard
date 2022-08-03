@@ -1,0 +1,1593 @@
+<app-header *ngIf="Save==true"></app-header>
+
+<div  *ngIf="Save==true" >
+ 
+  <div class="col-lg-12 mx-auto 
+  pt-4 text-end" style="width:90%">
+<span style="font-family: Gotham Book Regular;font-size: 0.9rem;color: white;cursor: pointer;" (click)="OpenStatus()" data-bs-toggle="modal" data-bs-target="#statusalertid"><span
+style="font-family: Gotham Bold;font-size: 0.9rem;color: white;"></span><a><u>Check status of your Request</u></a></span>
+</div>
+  <div class="col-lg-12 mx-auto 
+              pt-4" style="width:90%">
+    <span style="font-family: Gotham Book Regular;font-size: 0.9rem;color: white;"><span
+        style="font-family: Gotham Bold;font-size: 0.9rem;color: white;">Note:</span> Any refund amount will be paid to
+      the lienholder (if applicable) and applied by the lienholder in accordance with the terms and conditions of any
+      financial arrangement you have with the lienholder. If applicable, canceling service products will not lower your
+      payment.</span>
+  </div>
+  <div class="content_width">
+    <div class="row mt-4">
+      <div class="col-lg-6">
+        <div class="req_bg">
+          <h6>Vehicle details</h6>
+          <form [formGroup]="VehicleDet">
+            <div class="row align-items-center mb-2">
+              <label class=" col-sm-3 pe-0">Customer First Name:</label>
+              <div class="col-sm-4">
+                <span class="text-danger" *ngIf="VehicleDet.value.firstName.length <=0">*</span>
+                <input type="text" class="form-control" formControlName="firstName" autofocus autocomplete="name" maxlength="49" style="text-transform: uppercase;">
+              </div>
+
+              <!-- <div class="col-sm-1" *ngIf="VehicleDet.controls.firstName.hasError('pattern')">
+                            <i class="material-icons" style="font-size:25px;color:#dc3545 ;">error_outline</i>
+                          </div> -->
+
+              <label class=" col-sm-2 pe-0 ">Last Name:</label>
+              <div class="col-sm-3">
+                <span class="text-danger" *ngIf="VehicleDet.value.lastName.length <=0">*</span>
+                <input type="text" class="form-control" formControlName="lastName" autocomplete="family-name" maxlength="49" style="text-transform: uppercase;">
+              </div>
+              <!-- <div *ngIf="!VehicleDet.controls.lastName.valid && (VehicleDet.controls.lastName.dirty ||submitted)"
+                          class="text-danger">
+                          <span *ngIf="VehicleDet.controls.lastName.errors.required">*</span>
+                          </div> -->
+            </div>
+            <div class="row align-items-center mb-2">
+              <label class=" col-sm-3 pe-0">Email:</label>
+              <div class="col-sm-4">
+                <span class="text-danger" *ngIf="VehicleDet.value.emailid.length <=0">*</span>
+                <input type="text" class="form-control" formControlName="emailid"
+                  pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,5}$" autocomplete="email" maxlength="99"><br>
+                  <span *ngIf="!VehicleDet.controls.emailid.valid && (VehicleDet.controls.emailid.touched ||submitted)">
+                    <span *ngIf="VehicleDet.controls.emailid.errors.pattern" style="color:#dc3545 ;">Please Enter Valid
+                      Format</span> </span>
+              </div>
+              <!-- <div class="col-sm-5"
+                *ngIf="!VehicleDet.controls.emailid.valid && (VehicleDet.controls.emailid.touched ||submitted)">
+                <span *ngIf="VehicleDet.controls.emailid.errors.pattern" style="color:#dc3545 ;">Please Enter Valid
+                  Format</span>
+              </div> -->
+              <label class=" col-sm-2 pe-0 mb-1">Phone #:</label>
+              <div class="col-sm-3">
+                <span class="text-danger" *ngIf="VehicleDet.value.phone.length <=0">*</span>
+                <input type="text" class="form-control" formControlName="phone" pattern="[0-9+( )-]{14}$"
+                  [textMask]="{mask: phoneFormat}" autocomplete="tel" >
+                  <span *ngIf="!VehicleDet.controls.phone.valid && (VehicleDet.controls.phone.touched ||submitted)">
+                    <span *ngIf="VehicleDet.controls.phone.errors.pattern" style="color:#dc3545 ;">Please Enter Valid
+                      Format</span> </span>
+              </div>
+            </div>
+            <div class="row align-items-center mb-2">
+              <label class=" col-sm-3 pe-0 mb-0">Preferred method of contact:</label>
+              <div class="col-sm-4 mb-1">
+                <div class="radio-item">
+                  <input type="radio" id="mtconp" name="mtdofcontact" value="p" formControlName="mtdofcontact">
+                  <label for="mtconp">Phone</label>
+                </div>
+
+                <div class="radio-item">
+                  <input type="radio" id="mtcone" name="mtdofcontact" value="e" formControlName="mtdofcontact" >
+                  <label for="mtcone">Email</label>
+                </div>
+           
+              </div>
+           
+                  </div>
+           
+            <div class="row align-items-center mb-2">
+              <label class=" col-sm-3 pe-0">Selling Dealership:</label>
+              <div class="col-sm-9" >
+                <div class="dropdown">
+                  <!-- <span style="color: #dc3545 !important; font-size: 20px;" *ngIf="selectedstoreid=='0'">*</span> -->
+                  <button class="btn" type="button" style="  width: 101%;height: 100%;position: relative;border-radius: 15px;text-align: inherit;padding-top: 2px;font-size: .7rem;padding-left: 1%;"
+                          id="dropdownMenuButton" 
+                          data-toggle="dropdown"
+                          aria-haspopup="true" 
+                          aria-expanded="false">
+                         
+                          <div style="display:flex;"> <span style="color: #dc3545 !important; font-size: 20px;  margin-top: -3px;  padding-right: 3px;margin-left: -6px;" *ngIf="selectedstorename=='SELECT'">*</span> 
+                          {{selectedstorename}}  </div>   
+                        
+                        </button>
+                     
+        
+                  <ul class="dropdown-menu" 
+                      aria-labelledby="dropdownMenuButton" style="overflow: scroll;height: 350px;">
+                        <li class="dropdown-item" (click)="selecteddropdownvalues('Store','','SELECT')">SELECT</li>
+                          <li class="dropdown-item"   *ngFor="let s of stores" (click)="selecteddropdownvalues('Store',s.AS_ID,s.AS_DEALERNAME,s.STOREMAIL)">
+                            {{s.AS_DEALERNAME}}</li>
+                  </ul>
+              </div>
+                <!-- <span class="text-danger" *ngIf="VehicleDet.value.sellingDealership.length <=0">*</span>
+                <select class="form-select " formControlName="sellingDealership"  >
+                  <option value="" >&nbsp;&nbsp;SELECT</option>
+                  <option *ngFor="let s of stores" [value]="s.AS_ID" >{{s.AS_DEALERNAME}}
+
+                  
+                </select> -->
+              </div>
+              <!-- <div *ngIf="!VehicleDet.controls.sellingDealership.valid && (VehicleDet.controls.sellingDealership.dirty ||submitted)"
+                        class="text-danger">
+                        <span *ngIf="VehicleDet.controls.sellingDealership.errors.required">*</span>
+                        </div> -->
+            </div>
+            <div class="row align-items-center mb-2">
+              <label class=" col-sm-3 pe-0">Agreement #/Contract #:
+                 <!-- <span style="float:right"><img
+                    src="../../assets/images/info_icon.png"></span> -->
+                  </label>
+              <div class="col-sm-4">
+                <input type="text" class="form-control" formControlName="contract" (keypress)="keyPressAlphaNumeric($event)"  maxlength="20" >
+              </div>
+              <!-- <div class="col-sm-5"
+              *ngIf="!VehicleDet.controls.contract.valid && (VehicleDet.controls.contract.touched ||submitted)">
+              <span *ngIf="VehicleDet.controls.contract.errors.minlength" style="color:#dc3545 ;">Contract # must be 12 Digits </span>
+            </div> -->
+            </div>
+            <div class="row align-items-center mb-2">
+              <label class=" col-sm-3 pe-0">VIN:</label>
+              <div class="col-sm-4">
+                <span class="text-danger" *ngIf="VehicleDet.value.vin.length <=0">*</span>
+                <input type="text" class="form-control" formControlName="vin" maxlength="17" minlength="17" (keypress)="keyPressAlphaNumeric($event)" >
+              </div>
+              <!-- <div *ngIf="!RefundDet.controls.routing.valid && (RefundDet.controls.routing.touched ||submitted)">
+                <span *ngIf="RefundDet.controls.routing.errors.minlength"
+                  style="font-size: 10px;color:#dc3545 ;">Invalid Routing</span>
+              </div> -->
+              <!-- <div *ngIf="!VehicleDet.controls.vin.valid && (VehicleDet.controls.vin.dirty ||submitted)"
+                        class="text-danger">
+                        <span *ngIf="VehicleDet.controls.vin.errors.required">*</span>
+                        </div> -->
+              <div class="col-sm-4" *ngIf="!VehicleDet.controls.vin.valid && (VehicleDet.controls.vin.touched ||submitted)">
+                          <span *ngIf="VehicleDet.controls.vin.errors.minlength" style="color:#dc3545 ;">Please Enter Valid VIN </span>
+                          </div>
+              <!-- <div class="col-sm-4" *ngIf="!VehicleDet.controls.vin.valid && (VehicleDet.controls.vin.touched ||submitted)">
+                            <span *ngIf="VehicleDet.controls.vin.errors.pattern" style="color:#dc3545 ;">invalid format</span>
+                            </div> -->
+            </div>
+            <div class="row align-items-center mb-2" style="display: none;">
+              <label class=" col-sm-3">Vehicle Year:</label>
+              <div class="col-sm-2 sml">
+                <div class="dropdown">
+                  <!-- <span style="color: #dc3545 !important; font-size: 20px;" *ngIf="selectedstoreid=='0'">*</span> -->
+                  <button class="btn" type="button" style="  width: 101%;height: 100%;position: relative;border-radius: 15px;text-align: inherit;padding-top: 1px;font-size: .7rem;padding-left: 1%;"
+                          id="dropdownMenuButton" 
+                          data-toggle="dropdown"
+                          aria-haspopup="true" 
+                          aria-expanded="false">
+                          <span> {{selectedyearname}} </span> </button>
+        
+                  <ul class="dropdown-menu"  style="overflow: scroll;height: 350px;min-width: 4rem;"
+                      aria-labelledby="dropdownMenuButton">
+                        <li class="dropdown-item deactive" (click)="selecteddropdownvalues('Year','','SELECT')">SELECT</li>
+                          <li class="dropdown-item"   *ngFor="let vy of vehicleyear" (click)="selecteddropdownvalues('Year',vy.y_modelyear,vy.y_modelyear)" >
+                            {{vy.y_modelyear}}</li>
+                  </ul>
+              </div>
+                <!-- <select class="form-select " formControlName="year" (change)="getmake()">
+                  <option disabled value="0">SELECT</option>
+                  <option *ngFor="let vy of vehicleyear" [value]="vy.y_modelyear" >{{vy.y_modelyear}}
+
+                
+                </select> -->
+              </div>
+              <label class=" col-sm-1 mb-1">Make:</label>
+              <div class="col-sm-2" [ngClass]="{ active: vehiclemake.length >0, deactive: vehiclemake.length ==0 }">
+                <div class="dropdown">
+                  <!-- <span style="color: #dc3545 !important; font-size: 20px;" *ngIf="selectedstoreid=='0'">*</span> -->
+                  <button class="btn" type="button" style="  width: 101%;height: 100%;position: relative;border-radius: 15px;text-align: inherit;padding-top: 1px;font-size: .7rem;padding-left: 1%; overflow: hidden;"
+                          id="dropdownMenuButton" 
+                          data-toggle="dropdown"
+                          aria-haspopup="true" 
+                          aria-expanded="false">
+                          <span> {{selectedmakename}} </span> </button>
+                          <!-- text-overflow: ellipsis; -->
+ 
+        
+                  <ul class="dropdown-menu"  style="overflow: scroll;height: 350px;min-width: 7rem;"
+                      aria-labelledby="dropdownMenuButton">
+                        <li class="dropdown-item deactive" (click)="selecteddropdownvalues('Make','','SELECT')">SELECT</li>
+                          <li class="dropdown-item"   *ngFor="let vm of vehiclemake" (click)="selecteddropdownvalues('Make',vm.D_DivisionId,vm.D_DivisionName)" >
+                            {{vm.D_DivisionName}}</li>
+                  </ul>
+              </div>
+                <!-- <select class="form-select " formControlName="make" (change)="getmodel()">
+                  <option disabled value="0">SELECT</option>
+               
+                  <option *ngFor="let vm of vehiclemake" [value]="vm.D_DivisionId" style="overflow: auto;">{{vm.D_DivisionName}}
+
+                </select> -->
+              </div>
+              <label class=" col-sm-1 mb-1">Model:</label>
+              <div class="col-sm-3 sml"
+                [ngClass]="{ active: vehiclemodel.length >0, deactive: vehiclemodel.length ==0 }">
+                <!-- <input type="text" class="form-control" formControlName="model"> -->
+                <div class="dropdown">
+                  <!-- <span style="color: #dc3545 !important; font-size: 20px;" *ngIf="selectedstoreid=='0'">*</span> -->
+                  <button class="btn" type="button" style="width: 101%;height: 100%;position: relative;border-radius: 15px;text-align: inherit;padding-top: 1px;font-size: .7rem;padding-left: 1%; overflow: hidden;"
+                          id="dropdownMenuButton" 
+                          data-toggle="dropdown"
+                          aria-haspopup="true" 
+                          aria-expanded="false">
+                          <span> {{selectedmodelname}} </span> </button>
+        
+                  <ul class="dropdown-menu " [ngClass]="{ mddrpdwnsr: vehiclemodel.length >6, mddrpdwn: vehiclemodel.length <= 6 }"  
+                      aria-labelledby="dropdownMenuButton">
+                        <li class="dropdown-item deactive" (click)="selecteddropdownvalues('Model','','SELECT')">SELECT</li>
+                          <li class="dropdown-item"   *ngFor="let vmd of vehiclemodel" (click)="selecteddropdownvalues('Model',vmd.m_modelid,vmd.m_modelname)" >
+                            {{vmd.m_modelname}}</li>
+                  </ul>
+              </div>
+                <!-- <select class="form-select " formControlName="model">
+                  <option disabled value="0">SELECT</option>
+                
+                  <option *ngFor="let vmd of vehiclemodel" [value]="vmd.m_modelid">{{vmd.m_modelname}}
+
+                </select> -->
+              </div>
+            </div>
+            <div class="row align-items-center mb-2">
+              <label class=" col-sm-3 pe-0">Date of Contract:</label>
+              <div class="col-sm-4">
+                <input type="date" name="contract" class="form-control" formControlName="dateOfContract"
+                  class=datepicker autocomplete="bday">
+              </div>
+
+            </div>
+            <div class="row align-items-center mb-2">
+
+              <label class=" col-sm-3 pe-0">Date of Cancellation:</label>
+              <div class="col-sm-4 sml">
+                <input type="date" name="cancellation" class="form-control" formControlName="dateOfCancellation"
+                  class="datepicker" autocomplete="bday" min=Today>
+              </div>
+            </div>
+            <div class="row align-items-center mb-2">
+              <label class=" col-sm-3 pe-0">Mileage at time of cancellation:</label>
+              <div class="col-sm-4">
+                <input type="text" class="form-control" maxlength="6" formControlName="mileage"
+                  (keypress)="keyPressNumbers($event)">
+              </div>
+
+            </div>
+          </form>
+
+        </div>
+        <div class="req_bg">
+          <form [formGroup]="ReasonsForCancel">
+
+          <div class="row align-items-center">
+
+            <div class="col-lg-6">
+              <h6>Reason for cancellation</h6>
+            </div>
+            <div class="col-lg-6">
+              <input type="file" #file style="display:none" (change)="uploadFile($event)" formControlName="upload">
+              <a href="javascript:void(0);" class="ms-3"><img src="assets/images/upload_icon.png" (click)="file.click()"
+                  style="cursor: pointer;"> <span class="text-danger" style="margin-top: -9px;margin-left: 0px;" *ngIf="uploadcontract.length <=0">*</span> &nbsp; <span (click)="file.click()" style="cursor: pointer;">upload
+                  document</span></a><br>
+             <span style="padding-left: 15%;" *ngIf="uploadcontract!=undefined"> {{(uploadcontract.toString() | slice:0:25) + (uploadcontract.toString().length > 25 ? '...' : '') }}</span>
+
+            </div>
+          </div>
+          <!-- <h6>Reason for cancellation</h6> -->
+
+            <div>
+              <!-- <input type="checkbox" id="symbols" class="custom-check-box" > -->
+              <label for="symbols"></label>
+              <span>Select why you are canceling the contract and then upload the required document by selecting
+                ‘Upload document’</span>
+            </div>
+            <div>
+              <input type="checkbox" id="symbols" class="custom-check-box" formControlName="customerRequest">
+              <label for="symbols"></label>
+              <span>No longer want product  <i>(secure odometer reading required)</i></span>
+            </div>
+            <div>
+              <input type="checkbox" id="symbolssd" class="custom-check-box" formControlName="SalesDeal">
+              <label for="symbolssd"></label>
+              <span>Sales deal voided  <i>(secure odometer reading required)</i></span>
+            </div>
+            <div>
+              <input type="checkbox" id="symbols1" class="custom-check-box" formControlName="vehicleSold">
+              <label for="symbols1"></label>
+              <span>Vehicle Sold / Traded <i>(trade-in / sale documentation required)</i></span>
+
+            </div>
+            <div>
+              <input type="checkbox" id="symbols2" class="custom-check-box" formControlName="repossession">
+              <label for="symbols2"></label>
+              <span> Repossession <i> (supporting documentation required)</i></span>
+            </div>
+            <div>
+              <input type="checkbox" id="symbols3" class="custom-check-box" formControlName="satisfiedLien">
+              <label for="symbols3"></label>
+              <span> Satisfied Lien/Vehicle Paid Off <i> (proof of payoff documentation required)</i></span>
+            </div>
+            <div>
+              <input type="checkbox" id="symbols4" class="custom-check-box" formControlName="totalLossofVehicle">
+              <label for="symbols4"></label>
+              <span> Total Loss of Vehicle <i> (total loss documentation required)</i></span>
+            </div>
+            
+            <div class="row">
+              <div class=" col-sm-6"><input type="checkbox" id="symbols5" class="custom-check-box"
+                  (click)="Others($event)" formControlName="other">
+                <label for="symbols5"></label>
+                <span> Other <i> (please specify reason) </i></span>
+              </div>
+              <div class=" col-sm-6" [ngClass]="{ active: otherText === 'Y', deactive: otherText === 'N' }"> <input
+                  id="otherText" type="text" class="form-control" formControlName="otheretext"
+                  [readonly]="otherText=='N'" maxlength="499"> </div>
+            </div>
+            <div>
+              <input type="checkbox" id="symbols13" class="custom-check-box" formControlName="dealercancellation" (change)="dealercancel()">
+              <label for="symbols13"></label>
+              <span> Dealer Cancellation </span>
+            </div>
+          </form>
+
+        </div>
+      </div>
+      <div class="col-lg-6">
+        <div class="req_bg">
+          <form [formGroup]="ContractType">
+            <div class="row align-items-center">
+              <div class="col-lg-4" style="white-space: nowrap;">
+                <h6 style="margin-bottom: 0;">Type of contract</h6>
+              </div>
+              <div class="col-lg-8 col-12" style="width:27%">
+                <div class="row align-items-center">
+                  <div class="col-6 contract">
+                    <div class="dropdown">
+                      <!-- <span style="color: #dc3545 !important; font-size: 20px;" *ngIf="selectedstoreid=='0'">*</span> -->
+                      <button class="btn" type="button" style="width: 101%;height: 100%;position: relative;border-radius: 15px;text-align: inherit;padding-top: 1px;font-size: .7rem;padding-left: 1%;"
+                              id="dropdownMenuButton" 
+                              data-toggle="dropdown"
+                              aria-haspopup="true" 
+                              aria-expanded="false">
+                              <span>{{selectcontractname}} </span> </button>
+            
+                      <ul class="dropdown-menu"  style="width: auto;"
+                          aria-labelledby="dropdownMenuButton">
+                            <li class="dropdown-item " (click)="selecteddropdownvalues('ContractType','0','SELECT')">SELECT</li>
+                            <li class="dropdown-item " (click)="selecteddropdownvalues('ContractType','Manufacturer','Manufacturer')">Manufacturer</li>
+                            <li class="dropdown-item " (click)="selecteddropdownvalues('ContractType','PWC','Principal Warranty Corp')">Principal Warranty Corp</li>
+
+                              <!-- <li class="dropdown-item"   *ngFor="let vmd of vehiclemodel" (click)="selecteddropdownvalues('Model',vmd.m_modelid,vmd.m_modelname)" >
+                                {{vmd.m_modelname}}</li> -->
+                      </ul>
+                  </div>
+                    <!-- <select class="form-select" formControlName="type" >
+                      <option value="0">select</option>
+                      <option value="Manufacturer">Manufacturer</option>
+                      <option value="PWC">Principal Warranty Corp</option>
+
+                    </select> -->
+                  </div>
+                  <div class="col-lg-6 col-6 px-0">
+                    <input type="file" #uploadfiles style="display:none" formControlName="uploadContract"
+                      (change)="uploadContract($event)">
+                    <a href="javascript:void(0);" class="ms-3 " (click)="uploadfiles.click()"><img
+                        src="assets/images/upload_icon.png" > &nbsp; <span
+                        class="upld_cnt">upload contract (optional)</span></a><br>
+                  
+                    <span style="margin-left: 25%;margin-top: 1%;" *ngIf="ContractName!=undefined">{{(ContractName.toString() | slice:0:15) + (ContractName.toString().length > 15 ? '...' : '') }} </span>
+                  </div>
+                </div>
+              </div>
+            
+            </div>
+            <div class="row mt-3">
+              <div class="col-lg-6">
+                <input type="checkbox" id="symbols6" class="custom-check-box" formControlName="vehicleServiceContract">
+                <label for="symbols6"></label>
+                <span>Vehicle Service Contract</span>
+              </div>
+              <div class="col-lg-6">
+                <input type="checkbox" id="symbols7" class="custom-check-box" formControlName="gap" (change)="gap($event)">
+                <label for="symbols7"></label>
+                <span>GAP</span>
+
+              </div>
+              <div class="col-lg-6">
+                <input type="checkbox" id="symbols8" class="custom-check-box" formControlName="ancillary"
+                (click)="Ancillary($event)">
+              <label for="symbols8"></label>
+              <span>Ancillary <i>(specify product type)</i></span>
+
+              </div>
+              <div class="col-lg-6" [ngClass]="{ active: ancillary === 'Y', deactive: ancillary === 'N' }">
+                <input type="text" class="form-control" formControlName="ancillaryType" [readonly]="ancillary=='N'" maxlength="99">
+              </div>
+              <!-- <div class="col-lg-12 d-flex align-items-center">
+             
+                <div class="col-sm-6 ms-auto" [ngClass]="{ active: ancillary === 'Y', deactive: ancillary === 'N' }">
+                  <input type="text" class="form-control" formControlName="ancillaryType" [readonly]="ancillary=='N'" maxlength="99">
+                </div>
+              </div> -->
+            </div>
+          </form>
+        </div>
+        <div class="req_bg"  >
+          <!-- *ngIf="ReasonsForCancel.value.dealercancellation != 'Y' && ReasonsForCancel.value.dealercancellation != true" -->
+          <h6>Cancellation refund details</h6>
+          <p>Please make refund check payable to: <i>(Lien satisfied letter from the lienholder or copy of the title is required as proof of payoff)</i>
+          </p>
+          <form [formGroup]="RefundDet">
+
+            <div class="row align-items-center mb-2" >
+              <label class=" col-sm-2 pe-0">Contract Owner:</label>
+              <div class="col-sm-10" [ngClass]="{ active: ReasonsForCancel.value.dealercancellation != true, deactive: ReasonsForCancel.value.dealercancellation == true }">
+                <input type="text" class="form-control" formControlName="contractOwner" autocomplete="name" maxlength="499">
+              </div>
+            </div>
+            <div class="row align-items-center mb-2">
+              <label class=" col-sm-2 pe-0">Address:</label>
+              <div class="col-sm-10" [ngClass]="{ active: ReasonsForCancel.value.dealercancellation != true, deactive: ReasonsForCancel.value.dealercancellation == true }">
+                <input type="text" class="form-control" formControlName="address" maxlength="499">
+              </div>
+            </div>
+            <!-- <div class="row align-items-center mb-2">
+              <label class=" col-sm-2 pe-0 mb-1">City:</label>
+              <div style="width: 22%;padding-left: 15px;">
+                <input type="text" class="form-control" formControlName="city" maxlength="49">
+              </div>
+              <label class="pe-0 mb-1" style="width: fit-content;">State:</label>
+              <div style="width:26%;">
+                <div class="row align-items-center">
+                  <div class="col-sm-12 contract">
+                    <div class="dropdown">
+                      <button class="btn" type="button" style="width: 101%;height: 100%;position: relative;border-radius: 15px;text-align: inherit;padding-top: 1px;font-size: .7rem;padding-left: 1%;"
+                              id="dropdownMenuButton" 
+                              data-toggle="dropdown"
+                              aria-haspopup="true" 
+                              aria-expanded="false">
+                             {{selectedstatename}}  </button>
+            
+                      <ul class="dropdown-menu"  style="overflow: scroll;height: 350px;width: auto;"
+                          aria-labelledby="dropdownMenuButton">
+                            <li class="dropdown-item deactive" (click)="selecteddropdownvalues('State','','SELECT')">SELECT</li>
+                              <li class="dropdown-item"   *ngFor="let s of states" (click)="selecteddropdownvalues('State',s.ST_CODE,s.ST_NAME)" >
+                                {{s.ST_NAME}}</li>
+                      </ul>
+                  </div>
+                
+                  </div>
+                </div>
+              </div>
+              <label class="pe-0 mb-1" style="width: fit-content;">Zip:</label>
+              <div style="width:19%">
+                <input type="text" class="form-control" formControlName="zip" maxlength="5"
+                  (keypress)="keyPressNumbers($event)" autocomplete="postal-code">
+              </div>
+            </div>  -->
+             <div class="row align-items-center mb-2">
+              <label class="col-sm-2 pe-0 mb-1">City:</label>
+              <div class="col-sm-3" [ngClass]="{ active: ReasonsForCancel.value.dealercancellation != true, deactive: ReasonsForCancel.value.dealercancellation == true }">
+                <input type="text" class="form-control" formControlName="city" maxlength="49">
+              </div>
+              <label class="col-sm-1 mb-1" style="padding-left: 15px;">State:</label>
+              <div class="col-sm-3" style="padding-left: 15px;" [ngClass]="{ active: ReasonsForCancel.value.dealercancellation != true, deactive: ReasonsForCancel.value.dealercancellation == true }">
+                <div class="dropdown" style="padding-left: 3px;">
+                  <!-- <span style="color: #dc3545 !important; font-size: 20px;" *ngIf="selectedstoreid=='0'">*</span> -->
+                  <button class="btn" type="button" style="width: 101%;height: 100%;position: relative;border-radius: 15px;text-align: inherit;padding-top: 1px;font-size: .7rem;padding-left: 1%; overflow: hidden;"
+                          id="dropdownMenuButton" 
+                          data-toggle="dropdown"
+                          aria-haspopup="true" 
+                          aria-expanded="false">
+                         {{selectedstatename}}  </button>
+        
+                  <ul class="dropdown-menu"  style="overflow: scroll;height: 350px;width: auto;"
+                      aria-labelledby="dropdownMenuButton">
+                        <li class="dropdown-item deactive" (click)="selecteddropdownvalues('State','','SELECT')">SELECT</li>
+                          <li class="dropdown-item"   *ngFor="let s of states" (click)="selecteddropdownvalues('State',s.ST_CODE,s.ST_NAME)" >
+                            {{s.ST_NAME}}</li>
+                  </ul>
+              </div>
+              </div>
+              <label class="col-sm-1 mb-1">Zip:</label>
+              <div class="col-sm-2" [ngClass]="{ active: ReasonsForCancel.value.dealercancellation != true, deactive: ReasonsForCancel.value.dealercancellation == true }">
+                <!-- <input type="text" class="form-control" formControlName="model"> -->
+                <input type="text" class="form-control" formControlName="zip" maxlength="5"
+                (keypress)="keyPressNumbers($event)" autocomplete="postal-code">
+              </div>
+            </div>
+
+            <div class="row align-items-center mb-2" >
+              <div class="col-10">
+                <!-- <input type="checkbox" id="symbols11" class="custom-check-box" checked formControlName="agreeCancellationTerms">
+                      <label for="symbols11"></label> -->
+                <span style="padding-right: 20px;">Do you still have an outstanding loan or lease?</span>
+                <div class="radio-item" [ngClass]="{ active: ReasonsForCancel.value.dealercancellation != true, deactive: ReasonsForCancel.value.dealercancellation == true }">
+                  <input type="radio" id="ritema" name="outstandingLoan" value="Y" formControlName="outstandingLoan" (change)="Loanorlease($event)" >
+                  <label for="ritema">Yes</label>
+                </div>
+
+                <div class="radio-item" [ngClass]="{ active: ReasonsForCancel.value.dealercancellation != true, deactive: ReasonsForCancel.value.dealercancellation == true }">
+                  <input type="radio" id="ritemb" name="outstandingLoan" value="N" formControlName="outstandingLoan" (change)="Loanorlease($event)">
+                  <label for="ritemb">No</label>
+                </div>
+              </div>
+              <!-- <div class="col-6">
+              
+              </div> -->
+            </div>
+            <div class="row align-items-center mb-2"   >             
+              <div class="col-12" *ngIf="RefundDet.value.outstandingLoan === 'Y'">             
+                <span>Payment will go back to the bank.</span>
+              </div>            
+            </div>
+            <div class="row align-items-center mb-2" style="display: none;"  >             
+              <div class="col-12" *ngIf="RefundDet.value.outstandingLoan === 'Y'">             
+                <div class="radio-item">
+                  <input type="radio" id="loanorleasefi" name="loanleasedet" value="F"  formControlName="loanleasedet" >
+                  <label for="loanorleasefi">Financial Institution</label>
+                </div>
+
+                <div class="radio-item">
+                  <input type="radio" id="loanorleasean" name="loanleasedet" value="A"  formControlName="loanleasedet" >
+                  <label for="loanorleasean">Account Number </label>
+                </div>
+              </div>            
+            </div>
+            <div class="row align-items-center mb-2" *ngIf="RefundDet.value.outstandingLoan === 'Y'">
+              <label class=" col-sm-3 pe-0">Financial Institution:</label>
+              <div class="col-sm-3">
+                <input type="text" class="form-control" formControlName="finame"  maxlength="49" >
+              </div>
+              <label class=" col-sm-3 pe-0 ">Account Number:</label>
+              <div class="col-sm-3">               
+                <input type="text" class="form-control" formControlName="acnumber" (keypress)="keyPressAlphaNumeric($event)" maxlength="15">
+              </div>
+            </div>
+            <div *ngIf="ContractType.value.gap != true" style="display: none;">
+            <p *ngIf="RefundDet.value.outstandingLoan != 'Y' ">Request Electronic Delivery (ACH) &nbsp; <span [ngClass]="{ active: RefundDet.value.outstandingLoan === 'N', deactive: RefundDet.value.outstandingLoan === '' }"><input type="checkbox" id="symbols9" formControlName="ach"
+                class="custom-check-box" [checked]="CollectInfo=='Y'" (change)="CollectDetails($event)" ><label
+                for="symbols9"></label></span></p>
+              </div>
+              <!-- <div *ngIf="ContractType.value.gap != true">
+            <div class="row align-items-center mb-2" *ngIf="CollectInfo=='Y' && RefundDet.value.outstandingLoan === 'N'">
+              <label class=" pe-0" style="width: fit-content;">Bank Name:</label>
+              <div style="width: 20%;">
+                <input type="text" class="form-control" formControlName="bankName" maxlength="49">
+              </div>
+              <label class="pe-0" style="width: fit-content;">Routing #:</label>
+              <div style="width:20%">
+                <input type="text" class="form-control" formControlName="routing" (keypress)="keyPressNumbers($event)"
+                  minlength="10" maxlength="10">
+                <div *ngIf="!RefundDet.controls.routing.valid && (RefundDet.controls.routing.touched ||submitted)">
+                  <span *ngIf="RefundDet.controls.routing.errors.minlength"
+                    style="font-size: 10px;color:#dc3545 ;">Routing must be 10 Digits</span>
+                </div>
+              </div>
+              <label class="pe-0" style="width: fit-content;">Acct. #:</label>
+              <div style="width:18%">
+                <input type="text" class="form-control" formControlName="acct" (keypress)="keyPressAlphaNumeric($event)" maxlength="15">
+              </div>
+            </div>
+          </div> -->
+          <div  *ngIf="ContractType.value.gap != true" style="display: none;">
+            <div class="row align-items-center mb-2" *ngIf="CollectInfo=='Y' && RefundDet.value.outstandingLoan === 'N'">
+            <label class="col-sm-2 pe-0 mb-1">Bank Name:</label>
+            <div class="col-sm-2">
+              <input type="text" class="form-control" formControlName="bankName" maxlength="49">
+            </div>
+          
+            <label class="col-sm-2 mb-1" style="padding-left: 10px;white-space: nowrap;">Routing #:</label>
+            <div class="col-sm-2" style="padding-left: 13px;" >
+              <input type="text" class="form-control" formControlName="routing" (keypress)="keyPressNumbers($event)"
+              minlength="10" maxlength="10">
+            <div *ngIf="!RefundDet.controls.routing.valid && (RefundDet.controls.routing.touched ||submitted)">
+              <span *ngIf="RefundDet.controls.routing.errors.minlength"
+                style="font-size: 10px;color:#dc3545 ;">Routing must be 10 Digits</span>
+            </div>
+            </div>
+        
+            <label class="col-sm-1 mb-1" style="padding-left: 20px;white-space: nowrap;">Acct. #:</label>
+            <span class="col-sm-1"></span>
+            <div class="col-sm-2" style="padding-left: 13px;">
+              <input type="text" class="form-control" formControlName="acct" (keypress)="keyPressAlphaNumeric($event)" maxlength="15">
+            </div>
+          </div>
+          </div>
+            <div class="row align-items-center mb-2">
+            
+              <div class="col-12" *ngIf="ContractType.value.gap != true" style="display:none">
+                <input type="checkbox" id="symbols12" class="custom-check-box" formControlName="reqExpedited" (change)="reqProcessing($event)">
+                <label for="symbols12"></label>
+                <span>Request Expedited Processing <i>(7-10 days) </i>$150 processing fee withheld from proceeds</span>
+              </div>
+              <div class="col-6" *ngIf="ContractType.value.gap != true" style="display:none">
+                <input type="checkbox" id="symbols10" class="custom-check-box" formControlName="approveExpedited"  >
+                <!-- (change)="appProcessing($event)" -->
+                <label for="symbols10"></label>
+                <span>I approve the Expedited Processing Fee</span>
+              </div>
+         
+              <div class="col-6">
+                <input type="checkbox" id="symbols11" class="custom-check-box" checked
+                  formControlName="agreeCancellationTerms">
+                <label for="symbols11"></label>
+                <span>I agree to the Terms of Cancellation</span>
+              </div>
+            </div>
+            <div class="row align-items-center mb-2">
+              <label class=" col-sm-3 pe-0" style="width:60%;">Customer Signature:</label>
+               <span class="col-sm-2 col-2 px-0 pe-0 mb-1" style="padding-left: 3px;"><input type="checkbox"
+                  formControlName="customerSignchk">
+                <label for="symbols"></label></span>
+              <!-- <span class="col-sm-1" style="color:#dc3545 !important;font-size: 20px;" *ngIf="!RefundDet.controls.customerSignchk.valid && (RefundDet.controls.customerSignchk.dirty ||submitted)">
+                            <span *ngIf="RefundDet.controls.customerSignchk.errors.required">*</span>
+                        </span>  -->
+            </div>
+
+            <div class="row align-items-center mb-2">
+              <div class="col-sm-11">
+                <!-- <input type="text" class="form-control" style="height: 40px; border-radius: 50px;"  formControlName="customersign"> -->
+                <span>By selecting the checkbox, I certify that this is my digital signature and I agree to the <span
+                    style="color: blue;cursor:pointer" data-bs-toggle="modal" data-bs-target="#contModal" >terms and
+                    conditions</span> of the service cancellation</span>
+              </div>
+            </div>
+            <!-- <p style="margin:1rem 0 0;">
+                    <i>Any refund due will be issued by your selling dealership.<br>
+                        The refund process can take 6 to 8 weeks from the time your completed cancellation paperwork is received.</i></p> -->
+          </form>
+        </div>
+        <div class="req_bg">
+          <!-- <div class="col-lg-6"></div> -->
+          <!-- <div class="col-lg-6"> -->
+          <form [formGroup]="RefundDet">
+            <input type="checkbox" id="symbols" formControlName="acknowledge">
+            <!-- <span class="col-sm-1" style="color:#dc3545 !important;font-size: 20px;" *ngIf="!RefundDet.controls.acknowledge.valid && (RefundDet.controls.acknowledge.dirty ||submitted)">
+                        <span *ngIf="RefundDet.controls.acknowledge.errors.required">*</span>
+                    </span> -->
+            <label for="symbols"></label> &nbsp;
+            <span style="font-family: Gotham Bold;font-size: 0.9rem;color: black;">By selecting the checkbox, I
+              acknowledge that:</span>
+            <ol style="font-family:Gotham Book Regular;color: black;">
+              <li>The refund process can take up to 45 days, from the time your completed cancellation paperwork is received. </li>
+              <li>If any information is incorrect or missing, I agree to be contacted at the preferred method above.  No refund will be issued until I have provided complete and correct documents and information. </li>
+             <li>The refund will be prorated and is paid to the lien holder if applicable and not to me</li>
+              <li>I will no longer have this service product after I submit the cancellation</li>
+            </ol>
+            <!-- </div> -->
+          </form>
+        </div>
+        <div class="col-lg-12" style="width:100%">
+<span style="font-family: Gotham Book Regular;font-size: 0.9rem;color: white;"><span
+  style="font-family: Gotham Book Regular;font-size: 0.9rem;color: white;" *ngIf="VehicleDet.value.sellingDealership !=0">	If you have any questions please email 
+  <span style="color: navy;text-decoration: underline;"><a href="mailto:{{storeemail}}" target="_blank">{{storeemail}}</a></span>.</span></span>
+</div>
+      </div>
+
+    </div>
+
+    <div class="row" style="padding-right: 25px;padding-bottom: 15px;">
+      <button class="submit" (click)="save()">Submit</button>
+    </div>
+  </div>
+
+ 
+</div>
+
+<!-- <button (click)="testing()">test</button> -->
+<div class="pic_cancel_bg_sm" *ngIf="Edit==true" [ngClass]="{ pic_cancel_bg_sm:  Fulldet === false, pic_cancel_bg: Fulldet === true }"> 
+  <div class="content_width">
+    <div class="row mt-4">
+      <div class="col-lg-12">
+        <div class="req_bg">
+          <h6>Vehicle details</h6>
+          <form [formGroup]="VehicleDet">
+            <div class="row align-items-center mb-2">
+              <label class=" col-sm-3 pe-0">Customer First Name:</label>
+              <div class="col-sm-4">
+                <input type="text" class="form-control" formControlName="firstName" disabled>
+              </div>
+                  <label class="col-sm-2 pe-0">Last Name:</label>
+              <div class="col-sm-3">
+                <input type="text" class="form-control" formControlName="lastName" disabled>
+              </div>
+            </div>
+            <div class="row align-items-center mb-2">
+              <label class=" col-sm-3 pe-0">Email:</label>
+              <div class="col-sm-4">
+                <input type="text" class="form-control" formControlName="emailid"
+                  pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,5}$" disabled>
+              </div>
+              <label class=" col-sm-2 pe-0">Phone #:</label>
+              <div class="col-sm-3">
+                <input type="text" class="form-control" formControlName="phone" pattern="[0-9+( )-]{14}$"
+                  disabled>
+              </div>
+            </div>
+         
+             <div class="row align-items-center mb-2">
+              <label class=" col-sm-3 pe-0">Preferred method of contact:</label>
+              <div class="col-sm-4">
+                <div class="radio-item">
+                  <input type="radio" id="mtconp" name="mtdofcontact" value="p" formControlName="mtdofcontact" disabled>
+                  <label for="mtconp">Phone</label>
+                </div>
+
+                <div class="radio-item">
+                  <input type="radio" id="mtcone" name="mtdofcontact" value="e" formControlName="mtdofcontact" disabled>
+                  <label for="mtcone">Email</label>
+                </div>
+           
+              </div>
+           
+                  </div>
+            <div class="row align-items-center mb-2">
+              <label class=" col-sm-3 pe-0">Selling Dealership:</label>
+              <div class="col-sm-9">
+                <!-- <select class="form-select " formControlName="sellingDealership" disabled>
+                    <option value="">&nbsp;&nbsp;SELECT</option>
+                    <option *ngFor="let s of stores" [value]="s.AS_ID">{{s.AS_DEALERNAME}}
+                </select> -->
+                <input type="text" class="form-control" formControlName="sellingDealership" disabled>
+
+              </div>
+            </div>
+            <div class="row align-items-center mb-2">
+              <label class=" col-sm-3 pe-0">Agreement #/Contract #:
+                <!-- <span style="float:right"><img
+                    src="../../assets/images/info_icon.png"></span> -->
+                  </label>
+              <div class="col-sm-9">
+                <input type="text" class="form-control" formControlName="contract" disabled>
+              </div>
+            </div>
+            <div class="row align-items-center mb-2">
+              <label class=" col-sm-3 pe-0">VIN:</label>
+              <div class="col-sm-4">
+                <input type="text" class="form-control" formControlName="vin" maxlength="17" disabled>
+              </div>
+            </div>
+            <div class="row align-items-center mb-2" style="display: none;">
+              <label class=" col-sm-3">Vehicle Year:</label>
+              <div class="col-sm-2 sml">
+                <!-- <select class="form-select " formControlName="year"  disabled>
+                    <option disabled value="0">SELECT</option>
+                    <option *ngFor="let vy of vehicleyear" [value]="vy.y_modelyear">{{vy.y_modelyear}}
+</select> -->
+<input type="text" class="form-control" formControlName="year" disabled>
+
+              </div>
+              <label class=" col-sm-1">Make:</label>
+              <div class="col-sm-2" >
+                <!-- <select class="form-select " formControlName="make" disabled>
+                    <option disabled value="0">SELECT</option>
+                    <option *ngFor="let vm of vehiclemake" [value]="vm.D_DivisionId">{{vm.D_DivisionName}}
+                </select> -->
+                <input type="text" class="form-control" formControlName="make" disabled>
+
+              </div>
+              <label class=" col-sm-1">Model:</label>
+              <div class="col-sm-3 sml">
+                <!-- <select class="form-select " formControlName="model" disabled>
+                    <option disabled value="0">SELECT</option>
+                    <option *ngFor="let vmd of vehiclemodel" [value]="vmd.m_modelid">{{vmd.m_modelname}}
+  
+                </select> -->
+                <input type="text" class="form-control" formControlName="model" disabled>
+             
+              </div>
+            </div>
+            <div class="row align-items-center mb-2">
+              <label class=" col-sm-3 pe-0">Date of Contract:</label>
+              <div class="col-sm-4">
+                <input type="text" name="contract" class="form-control" formControlName='dateOfContract'  [(ngModel)]="dtofcntrct"
+                 class=datepicker  disabled>
+                
+              </div>
+
+            </div>
+            <div class="row align-items-center mb-2">
+
+              <label class=" col-sm-3 pe-0">Date of Cancellation:</label>
+              <div class="col-sm-4 sml">
+                <input type="text"  class="form-control" formControlName='dateOfCancellation'  [(ngModel)]="dtofcnclton" class="datepicker" disabled>
+              </div>
+            </div>
+            <div class="row align-items-center mb-2">
+              <label class=" col-sm-3 pe-0">Mileage at time of cancellation:</label>
+              <div class="col-sm-4">
+                <input type="text" class="form-control" maxlength="10" formControlName="mileage"
+                   disabled>
+              </div>
+
+            </div>
+          </form>
+
+        </div>
+        <div class="req_bg">
+          <div class="row align-items-center">
+
+            <div class="col-lg-6">
+              <h6>Reason for cancellation</h6>
+            </div>
+            <div class="col-lg-1" *ngIf="ReasonFile!=''">
+            <img src="assets/images/upload_icon.png" 
+                  style="cursor: pointer;">
+            </div>
+            <!-- <div class="col-lg-5" *ngIf="reasonName!=''">
+                <a href='{{uploadreason}}' target="_blank" class="ms-3"><span  style="cursor: pointer;">{{reasonName}}</span></a>
+              </div>
+              <div class="col-lg-1" *ngIf="reasonName!=''">
+                <a href='{{uploadreason}}' target="_blank" class="ms-3"><img src="assets/images/upload_icon.png" 
+                    style="cursor: pointer;"></a>
+              </div> -->
+              <div class="col-lg-4" *ngIf="ReasonFile!=''" style="padding-left: 0px;">
+                 <span  style="cursor: pointer;" *ngIf="ReasonFile!=undefined">
+                    {{(ReasonFile.toString() | slice:0:35) + (ReasonFile.toString().length > 35 ? '...' : '') }}</span>
+                </div>
+          </div>
+          <form [formGroup]="ReasonsForCancel">
+            <div>
+              <label for="symbols"></label>
+              <span>Select why you are canceling the contract and then upload the required document by selecting
+                ‘Upload document’</span>
+            </div>
+            <div>
+              <input type="checkbox" id="symbols" class="custom-check-box" formControlName="customerRequest" disabled>
+              <label for="symbols"></label>
+              <span>No longer want product  <i>(secure odometer reading required)</i></span>
+            </div>
+            <div>
+              <input type="checkbox" id="symbolssd" class="custom-check-box"  formControlName="SalesDeal" disabled>
+              <label for="symbolssd"></label>
+              <span>Sales deal voided  <i>(secure odometer reading required)</i></span>
+            </div>
+            <div>
+              <input type="checkbox" id="symbols1" class="custom-check-box" formControlName="vehicleSold" disabled>
+              <label for="symbols1"></label>
+              <span>Vehicle Sold / Traded <i>(trade-in / sale documentation required)</i></span>
+
+            </div>
+            <div>
+              <input type="checkbox" id="symbols2" class="custom-check-box" formControlName="repossession" disabled>
+              <label for="symbols2"></label>
+              <span> Repossession <i> (supporting documentation required)</i></span>
+            </div>
+            <div>
+              <input type="checkbox" id="symbols3" class="custom-check-box" formControlName="satisfiedLien" disabled>
+              <label for="symbols3"></label>
+              <span> Satisfied Lien/Vehicle Paid Off <i> (proof of payoff documentation required)</i></span>
+            </div>
+            <div>
+              <input type="checkbox" id="symbols4" class="custom-check-box" formControlName="totalLossofVehicle" disabled>
+              <label for="symbols4"></label>
+              <span> Total Loss of Vehicle <i> (total loss documentation required)</i></span>
+            </div>
+            <div class="row">
+              <div class=" col-sm-6"><input type="checkbox" id="symbols5" class="custom-check-box"
+                 formControlName="other" disabled>
+                <label for="symbols5"></label>
+                <span> Other <i> (please specify reason) </i></span>
+              </div>
+              <div class=" col-sm-6" > <input
+                  id="otherText" type="text" class="form-control" formControlName="otheretext"
+                  disabled> </div>
+            </div>
+            <div>
+              <input type="checkbox" id="symbols13" class="custom-check-box" formControlName="dealercancellation" (change)="dealercancel()">
+              <label for="symbols13"></label>
+              <span> Dealer Cancellation </span>
+            </div>
+          </form>
+
+        </div>
+        <div class="req_bg">
+          <form [formGroup]="ContractType">
+            <div class="row align-items-center">
+              <div class="col-lg-4" style="white-space: nowrap;">
+                <h6 style="margin-bottom: 0;">Type of contract</h6>
+              </div>
+              <div class="col-lg-4" style="width:29%">
+                <div class="row align-items-center">
+                  <div class="col-sm-12 contract">
+                    <select class="form-select" formControlName="type" disabled>
+                      <option value="0">select</option>
+                      <option value="Manufacturer">Manufacturer</option>
+                      <option value="PWC">Principal Warranty Corp</option>
+
+                    </select>
+                  </div>
+                </div>
+              </div>
+              <!-- <div class="col-lg-4" *ngIf="ContractName!=''">
+                <a href="{{uploadcontract}}" target="_blank" class="ms-3 " ><img src="assets/images/upload_icon.png" 
+                    style="cursor: pointer;"> <span  class="upld_cnt">{{ContractName}}</span></a>
+                    <br>
+              </div> -->
+              <div class="col-lg-4" *ngIf="ContractFile!='' && ContractFile!=undefined && ContractFile!='null'">
+              <img src="assets/images/upload_icon.png" 
+                    style="cursor: pointer;">&nbsp;&nbsp; &nbsp;<span  class="upld_cnt" *ngIf="ContractFile!=undefined && ContractFile!='null'">
+                      {{(ContractFile.toString() | slice:0:30) + (ContractFile.toString().length > 30 ? '...' : '') }}
+                    </span>
+                    <br>
+              </div>
+            </div>
+            <div class="row mt-3">
+              <div class="col-lg-6">
+                <input type="checkbox" id="symbols6" class="custom-check-box" formControlName="vehicleServiceContract" disabled>
+                <label for="symbols6"></label>
+                <span>Vehicle Service Contract</span>
+              </div>
+              <div class="col-lg-6">
+                <input type="checkbox" id="symbols7" class="custom-check-box" formControlName="gap" disabled>
+                <label for="symbols7"></label>
+                <span>GAP</span>
+
+              </div>
+              <div class="col-lg-12 d-flex align-items-center">
+                <input type="checkbox" id="symbols8" class="custom-check-box" formControlName="ancillary"
+                  disabled>
+                <label for="symbols8"></label>
+                <span>Ancillary <i>(specify product type)</i></span>
+                <div class="col-sm-6 ms-auto" >
+                  <input type="text" class="form-control" formControlName="ancillaryType"  disabled>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+        <br><br>
+        <br><br>
+        <br><br>
+        <div class="req_bg" *ngIf="Fulldet==true ">
+          <h6>Cancellation refund details</h6>
+          <p>Please make refund check payable to: <i>(Lien satisfied letter from the lienholder or copy of the title is required as proof of payoff)</i>
+          </p>
+          <form [formGroup]="RefundDet">
+
+            <div class="row align-items-center mb-2">
+              <label class=" col-sm-2 pe-0">Contract Owner:</label>
+              <div class="col-sm-10">
+                <input type="text" class="form-control" formControlName="contractOwner" disabled>
+              </div>
+            </div>
+            <div class="row align-items-center mb-2">
+              <label class=" col-sm-2 pe-0">Address:</label>
+              <div class="col-sm-10">
+                <input type="text" class="form-control" formControlName="address" disabled>
+              </div>
+            </div>
+            <div class="row align-items-center mb-2">
+              <label class=" col-sm-2 pe-0">City:</label>
+              <div style="width: 22%;">
+                <input type="text" class="form-control" formControlName="city" disabled>
+              </div>
+              <label class="pe-0" style="width: fit-content;">State:</label>
+              <div style="width:26%">
+                <div class="row align-items-center">
+                  <div class="col-sm-12 contract">
+                    <!-- <select class="form-select " formControlName="state" disabled>
+                        <option value="0">select</option>
+
+                        <option *ngFor="let s of states" [value]="s.ST_CODE">{{s.ST_NAME}}
+                    </select> -->
+<input type="text" class="form-control" formControlName="state" disabled>
+
+                  </div>
+                </div>
+              </div>
+              <label class="pe-0" style="width: fit-content;">Zip:</label>
+              <div style="width:19%">
+                <input type="text" class="form-control" formControlName="zip" maxlength="5"
+                  disabled>
+              </div>
+            </div>
+            <div class="row align-items-center mb-2">
+              <div class="col-12">
+                <span style="padding-right: 20px;">Do you still have an outstanding loan or lease?</span>
+                <div class="radio-item">
+                  <input type="radio" id="ritema" name="outstandingLoan" value="Y" formControlName="outstandingLoan" disabled>
+                  <label for="ritema">Yes</label>
+              </div>
+              
+              <div class="radio-item">
+                  <input type="radio" id="ritemb" name="outstandingLoan" value="N" formControlName="outstandingLoan" disabled>
+                  <label for="ritemb">No</label>
+              </div>
+              </div>
+          
+            </div>
+            <div class="row align-items-center mb-2">             
+              <div class="col-12" *ngIf="RefundDet.value.outstandingLoan === 'Y'">             
+                <span>Payment will go back to the bank.</span>
+              </div>            
+            </div>
+            <div class="row align-items-center mb-2" style="pointer-events: none;display: none;"  >             
+              <div class="col-12" *ngIf="RefundDet.value.outstandingLoan === 'Y'">             
+                <div class="radio-item">
+                  <input type="radio" id="loanorleasefi" name="loanleasedet" value="F"  formControlName="loanleasedet" >
+                  <label for="loanorleasefi">Financial Institution</label>
+                </div>
+
+                <div class="radio-item">
+                  <input type="radio" id="loanorleasean" name="loanleasedet" value="A"  formControlName="loanleasedet" >
+                  <label for="loanorleasean">Account Number </label>
+                </div>
+              </div>            
+            </div>
+            <div class="row align-items-center mb-2" *ngIf="RefundDet.value.outstandingLoan === 'Y'">
+              <label class=" col-sm-3 pe-0">Financial Institution:</label>
+              <div class="col-sm-3">
+                <input type="text" class="form-control" formControlName="finame"  maxlength="49" >
+              </div>
+              <label class=" col-sm-3 pe-0 ">Account Number:</label>
+              <div class="col-sm-3">               
+                <input type="text" class="form-control" formControlName="acnumber" (keypress)="keyPressAlphaNumeric($event)" maxlength="15">
+              </div>
+            </div>
+
+
+            <p style="display: none;">Request Electronic Delivery (ACH) &nbsp; <input type="checkbox" id="symbols9" formControlName="ach"
+                class="custom-check-box" disabled ><label
+                for="symbols9"></label></p>
+            <div class="row align-items-center mb-2" *ngIf="CollectInfo=='Y'" style="display: none;">
+              <label class=" pe-0" style="width: fit-content;">Bank Name:</label>
+              <div style="width: 20%;">
+                <input type="text" class="form-control" formControlName="bankName" disabled>
+              </div>
+              <label class="pe-0" style="width: fit-content;padding-left: 2px;">Routing #:</label>
+              <div style="width:20%">
+                <input type="text" class="form-control" formControlName="routing" 
+                  minlength="10" maxlength="10" disabled>
+              
+              </div>
+              <label class="pe-0" style="width: fit-content;">Acct. #:</label>
+              <div style="width:18%">
+                <input type="text" class="form-control" formControlName="acct" disabled>
+              </div>
+            </div>
+         
+
+            <div class="row align-items-center mb-2">
+              <div *ngIf="ContractType.value.gap != true" style="display:none">
+                <input type="checkbox" id="symbols12" class="custom-check-box" formControlName="reqExpedited" disabled>
+                <label for="symbols12"></label>
+                <span>Request Expedited Processing <i>(7 - 10 days) </i>$150 processing fee withheld from proceeds</span>
+              </div>
+              <div class="col-6" *ngIf="ContractType.value.gap != true" style="display:none">
+                <input type="checkbox" id="symbols10" class="custom-check-box" formControlName="approveExpedited" disabled>
+                <label for="symbols10"></label>
+                <span>I approve the Expedited Processing Fee</span>
+              </div>
+              <div class="col-6">
+                <input type="checkbox" id="symbols11" class="custom-check-box" checked
+                  formControlName="agreeCancellationTerms" disabled>
+                <label for="symbols11"></label>
+                <span>I agree to the Terms of Cancellation</span>
+              </div>
+            </div>
+            <div class="row align-items-center mb-2" style="pointer-events: none;">
+              <label class=" col-sm-6 pe-0" >Customer Signature:  <input type="checkbox"
+                formControlName="customerSignchk" ></label>
+           
+            </div>
+
+            <div class="row align-items-center mb-2">
+              <div class="col-sm-11">
+                <span>By selecting the checkbox, I certify that this is my digital signature and I agree to the terms and
+                    conditions of the service cancellation</span>
+              </div>
+            </div>
+           </form>
+        </div>
+
+        <div class="req_bg" style="pointer-events: none;">
+         
+          <form [formGroup]="RefundDet">
+            <input type="checkbox" id="symbols" formControlName="acknowledge" >
+         
+            <label for="symbols"></label> &nbsp;
+            <span style="font-family: Gotham Bold;font-size: 0.9rem;color: black;">By selecting the checkbox, I
+              acknowledge that:</span>
+            <ol style="font-family:Gotham Book Regular;color: black;">
+              <li>The refund process can take up to 45 days, from the time your completed cancellation paperwork is received.</li>
+              <li>If any information is incorrect or missing, I agree to be contacted at the preferred method above.  No refund will be issued until I have provided complete and correct documents and information. </li>
+             <li>The refund will be prorated and is paid to the lien holder if applicable and not to me</li>
+              <li>I will no longer have this service product after I submit the cancellation</li>
+            </ol>
+           
+          </form>
+        </div>
+        <br><br>
+      </div>
+      <div class="col-lg-6">
+      
+      </div>
+
+    </div>            
+   
+  </div>
+</div>
+
+<div class="modal fade bd-example-modal-sm" id="validations" tabindex="-1" aria-labelledby="contModalLabel" aria-hidden="true">
+  <div class="modal-dialog" >
+    <div class="modal-content modal-sm">
+      <!-- <div class="modal-header">
+
+        <b>Check Status of your Request</b>
+
+        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">x
+        </button>
+
+      </div> -->
+      <div class="modal-body" >
+        <div class="col-lg-12">
+          <div class="row justify-content-center">
+            <div  *ngIf="VehicleDet.value.firstName=='' || VehicleDet.value.lastName=='' ||  VehicleDet.value.phone=='' || VehicleDet.value.emailid=='' || VehicleDet.value.sellingDealership==0 || this.VehicleDet.value.vin=='' || this.uploadcontract=='' || (this.RefundDet.value.outstandingLoan=='Y' && this.RefundDet.value.finame=='') || (this.RefundDet.value.outstandingLoan=='Y' && this.RefundDet.value.acnumber=='') ">
+              <div> <span class="warning">Please Enter all information </span> </div>
+              <div>
+                <br>
+                <div *ngIf="!VehicleDet.controls.firstName.valid && (VehicleDet.controls.firstName.dirty ||submitted)">
+                  <span *ngIf="VehicleDet.controls.firstName.errors.required" style="font-size: 15px;"> Enter First Name
+                  </span>
+                </div>
+            
+            
+                <div *ngIf="!VehicleDet.controls.lastName.valid && (VehicleDet.controls.lastName.dirty ||submitted)">
+                  <span *ngIf="VehicleDet.controls.lastName.errors.required" style="font-size: 15px;"> Enter Last Name </span>
+                </div>
+            
+            
+                <div *ngIf="!VehicleDet.controls.phone.valid && (VehicleDet.controls.phone.dirty ||submitted)">
+                  <span *ngIf="VehicleDet.controls.phone.errors.required" style="font-size: 15px;"> Enter Phone Number</span>
+                </div>
+            
+            
+                <div *ngIf="!VehicleDet.controls.emailid.valid && (VehicleDet.controls.emailid.dirty ||submitted)">
+                  <span *ngIf="VehicleDet.controls.emailid.errors.required" style="font-size: 15px;"> Enter Email</span>
+                </div>
+                <div
+                  *ngIf="!VehicleDet.controls.sellingDealership.valid && (VehicleDet.controls.sellingDealership.dirty ||submitted)">
+                  <span style="font-size: 15px;" *ngIf="VehicleDet.controls.sellingDealership.errors.required"> Select Selling
+                    Dealership</span>
+                </div>
+            
+                <div *ngIf="!VehicleDet.controls.vin.valid && (VehicleDet.controls.vin.dirty ||submitted)">
+                  <span *ngIf="VehicleDet.controls.vin.errors.required" style="font-size: 15px;"> Enter VIN Number</span>
+                </div>
+                <div *ngIf="!VehicleDet.controls.vin.valid && (VehicleDet.controls.vin.dirty ||submitted)">
+                  <span *ngIf="VehicleDet.controls.vin.errors.pattern" style="font-size: 15px;">Invalid VIN, Please Check </span>
+                </div>
+                <div *ngIf="this.uploadcontract==''">
+                  <span style="font-size: 15px;">Upload document for the cancellation reason </span>
+                </div>
+            
+            
+                <div *ngIf="RefundDet.value.finame=='' && this.RefundDet.value.outstandingLoan=='Y'">
+                  <span  style="font-size: 15px;"> Enter Financial Institution
+                  </span>
+                </div>
+                <div *ngIf="RefundDet.value.acnumber =='' && this.RefundDet.value.outstandingLoan=='Y' ">
+                  <span style="font-size: 15px;"> Enter Account Number </span>
+                </div>
+              </div>
+              <div class="warningokbtn"><button class="submit" (click)="ok()" data-bs-dismiss="modal" aria-label="Close">Ok</button>
+              </div>
+            
+            </div>  
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+<!-- <div *ngIf="submitted==true && RefundDet.value.ach==true">
+  <div class="alert" *ngIf="RefundDet.value.bankName=='' || RefundDet.value.acct==''">
+    <div> <span class="warning">Please Enter all information </span> 
+    </div>
+    <div> 
+      <br>
+      <div *ngIf="RefundDet.value.bankName==''">
+        <span  style="font-size: 15px;"> Enter Bank Name
+        </span>
+      </div>
+  
+  
+      <div *ngIf="RefundDet.value.acct ==''">
+        <span style="font-size: 15px;"> Enter Account Number </span>
+      </div>
+  
+  
+  
+    <div class="warningokbtn"><button class="alertbuttons" (click)="ok()">Ok</button>
+    </div>
+  
+  </div>
+  </div>
+</div> -->
+<div class="modal fade bd-example-modal-sm" id="achvalidations" tabindex="-1" aria-labelledby="contModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-sm" >
+    <div class="modal-content">
+      <!-- <div class="modal-header">
+
+        <b>Check Status of your Request</b>
+
+        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">x
+        </button>
+
+      </div> -->
+      <div class="modal-body" >
+        <div class="col-lg-12">
+          <div class="row justify-content-center">
+            <!-- <div  *ngIf="RefundDet.value.bankName=='' || RefundDet.value.acct==''">
+              <div> <span class="warning">Please Enter all information </span> 
+              </div>
+              <div> 
+                <br>
+                <div *ngIf="RefundDet.value.bankName==''">
+                  <span  style="font-size: 15px;"> Enter Bank Name
+                  </span>
+                </div>
+            
+            
+                <div *ngIf="RefundDet.value.acct ==''">
+                  <span style="font-size: 15px;"> Enter Account Number </span>
+                </div>
+            
+            
+            
+              <div class="warningokbtn"><button class="alertbuttons" data-bs-dismiss="modal" aria-label="Close" (click)="ok()">Ok</button>
+              </div>
+            
+            </div>
+            </div>      -->
+            <!-- <div  *ngIf="RefundDet.value.loanleasedet==''">
+              <div> <span class="warning">Please Enter all information </span> 
+              </div>
+              <div> 
+                <br>
+                <div *ngIf="RefundDet.value.bankName==''">
+                  <span  style="font-size: 15px;"> Select Financial Institution/Account Number
+                  </span>
+                </div>
+                    
+              <div class="warningokbtn"><button class="alertbuttons" data-bs-dismiss="modal" aria-label="Close" (click)="ok()">Ok</button>
+              </div>
+            
+            </div>
+            </div> -->
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+<!-- <div class="redalert" *ngIf="message==true">
+  <span style="font-size: medium;">{{responceContent}}</span>
+  <div style="padding-left: 45%;"><button class="submit" (click)="closemessage()">Ok</button>
+  </div>
+</div> -->
+<!-- <div class="Confirmationalert" *ngIf="confirmationPopup==true">
+  <span style="font-size: medium;">Note: Any refund amount will be paid to the lienholder (if applicable) and applied by the lienholder in accordance with the terms and conditions of any financial arrangement you have with the lienholder. If applicable, canceling service products will not lower your payment.</span>
+  <div style="font-size: medium;"><span
+    style="font-size: medium;">	If you have any questions please email <span style="color: navy;text-decoration: underline;">cancellations@swickard.com </span>.</span></div>
+  <div style="font-size: medium;">Would you still like to submit your request?  </div>
+  <div style="padding-left: 35%;"><button class="confirmsubmit" (click)="closeConfirm('Y')">Yes</button>&nbsp;&nbsp;<button class="confirmsubmit" (click)="closeConfirm('N')">No</button>
+  </div>
+</div> -->
+<div class="modal fade bd-example-modal-xl" id="Confirmationalert" tabindex="-1" aria-labelledby="contModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl" >
+    <div class="modal-content">
+      <!-- <div class="modal-header">
+
+        <b>Check Status of your Request</b>
+
+        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">x
+        </button>
+
+      </div> -->
+      <div class="modal-body" >
+        <div class="col-lg-12">
+          <div class="row justify-content-center">
+            <span style="font-size: medium;">Note: Any refund amount will be paid to the lienholder (if applicable) and applied by the lienholder in accordance with the terms and conditions of any financial arrangement you have with the lienholder. If applicable, canceling service products will not lower your payment.</span>
+  <div style="font-size: medium;"><span
+    style="font-size: medium;">	If you have any questions please email <span style="color: navy;text-decoration: underline;">
+      <a href="mailto:{{storeemail}}" target="_blank">{{storeemail}}</a></span>.</span></div>
+  <div style="font-size: medium;">Would you still like to submit your request?  </div>
+  <div style="padding-left: 35%;"><button class="confirmsubmit" (click)="closeConfirm('Y')" data-bs-dismiss="modal" aria-label="Close">Yes</button>&nbsp;&nbsp;<button class="confirmsubmit" (click)="closeConfirm('N')" data-bs-dismiss="modal" aria-label="Close">No</button>
+  </div>       
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade bd-example-modal-lg" id="warningmessage" tabindex="-1" aria-labelledby="contModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" style="width: fit-content;" >
+    <div class="modal-content">
+      <!-- <div class="modal-header">
+
+        <b>Check Status of your Request</b>
+
+        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">x
+        </button>
+
+      </div> -->
+      <div class="modal-body" >
+        <div class="col-lg-12">
+          <div class="row justify-content-center">
+            <span style="font-size: medium;">{{responceContent}}</span>
+            <div style="padding-left: 36%;"><button class="submit" (click)="closemessage()" data-bs-dismiss="modal" aria-label="Close">Ok</button>
+            </div>       
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+<div class="modal fade bd-example-modal-lg" id="statusalertid" tabindex="-1" aria-labelledby="contModalLabel" aria-hidden="true" >
+  <div class="modal-dialog modal-lg" style="width: fit-content;">
+    <div class="modal-content" >
+      <!-- <div class="modal-header">
+
+        <b>Check Status of your Request</b>
+
+        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">x
+        </button>
+
+      </div> -->
+      <div class="modal-body" >
+        <div class="col-lg-12">
+          <div class="row justify-content-center">
+            <!-- <span class="warning"> </span>  -->
+            <!-- <div class="col-lg-1"></div> -->
+            <div class="col-lg-12">
+              <div *ngIf="statusform==true"> <span class="warning"> Check status of your Request</span> 
+              <div class="req_bg">
+                <div class="row align-items-center mb-2">
+                  <label class="col-sm-12 pe-0" style="color:#dc3545">{{warningMessage}}</label>          
+                </div>
+              <div class="row align-items-center mb-2">
+                <label class=" col-sm-5 pe-0" style="white-space: nowrap;">Reference Id:</label>
+                <div class="col-sm-7">       
+                  <input type="text" class="form-control" [(ngModel)]="refid" maxlength="15" (keypress)="keyPressNumbers($event)">
+                </div>     
+              </div>
+              <div class="row align-items-center mb-2">    
+                <label class=" col-sm-5 pe-0 " style="white-space: nowrap;">VIN/LastName:</label>
+                <div class="col-sm-7">       
+                  <input type="text" class="form-control" [(ngModel)]="vinlastname" maxlength="25" style="text-transform: uppercase;">
+                </div>     
+              </div>
+              <!-- <div class="row align-items-center mb-1">    
+                <label class=" col-sm-1 pe-0 mb-0">   <input type="checkbox" [(ngModel)]="checkStatus" (change)="notify($event)"> </label>      
+                <div class="col-sm-11">       
+                 <span>Notify me when status changes</span><br>
+          
+                </div>     
+              </div> -->
+              <!-- <div class="row align-items-center mb-1">    
+                <label class=" col-sm-1 pe-0 mb-0"></label>      
+                <div class="col-sm-11">       
+                 <span style="color:#dc3545" *ngIf="statusalertmsg==true"> Please Check the Notify CheckBox </span>
+                </div>     
+              </div> -->
+            </div>
+            <div class="msgokbtn"><button class="alertbuttons" (click)="closestatus('SR')">Ok</button>
+              <button class="alertbuttons" (click)="closestatus('OC')" data-bs-dismiss="modal" aria-label="Close" #closeBtn>Cancel</button>
+            </div>
+            </div>
+          </div>
+          <!-- <div class="col-lg-1"></div> -->
+
+            <div *ngIf="statusresult==true"> <span class="warning" style="white-space: nowrap;"> Status of your Request </span> 
+              <div class="req_bg">
+              <div class="row align-items-center mb-2">
+                <label class=" col-sm-6  pe-0" style="padding-left: 0%;white-space: nowrap;">Customer Status:</label>
+                <div class="col-sm-6" style="white-space: nowrap;">       
+                  <label>{{Requeststatus}}</label>      
+                </div>    
+              </div>
+              <div class="row align-items-center mb-2" *ngIf="cancellationData[0].CONTRACT_TYPE!='PWC'">
+                <label class=" col-sm-6  pe-0" style="padding-left: 0%;white-space: nowrap;"> Notes:</label>
+                <div class="col-sm-6" style="white-space: nowrap;">       
+                  <label>
+
+                    {{(cancellationData[0].CF_NOTES == '' ? '-' : cancellationData[0].CF_NOTES)}}
+                  </label>      
+                </div>    
+              </div>
+              <div class="row align-items-center mb-2" *ngIf="Requeststatus!='Open'">    
+                <label class=" col-sm-6 pe-0 " style="padding-left: 0%;white-space: nowrap;">Status Updated Date:</label>
+                <div class="col-sm-6">       
+                  <label >{{cancellationData[0].CF_UPDATED_TS | date:'MM/dd/yyyy'}}</label>     
+                </div>     
+              </div>
+              <div class="row align-items-center mb-2" *ngIf="Requeststatus!='Open'">    
+                <label class=" col-sm-6 pe-0 " style="padding-left: 0%;white-space: nowrap;">Uploaded Check:</label>
+                <div class="col-sm-6"  *ngIf="cancellationData[0].CF_PAYMENT_UPLOAD_CHEQUE!=='null'" style="cursor: pointer;">       
+                  <label (click)="download()" style="cursor: pointer;">{{cancellationData[0].CF_PAYMENT_UPLOAD_CHEQUE}}</label>     
+                </div> 
+                <div class="col-sm-6"  *ngIf="cancellationData[0].CF_PAYMENT_UPLOAD_CHEQUE== 'null'">       
+                  <label>---</label>     
+                </div>    
+              </div>
+            </div>
+            <div style="padding-left: 20%;"><button class="submit" (click)="closestatus('OC')" data-bs-dismiss="modal" aria-label="Close">Ok</button>
+            </div>
+            </div>
+        
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+<div class="modal fade bd-example-modal-xl" id="contModal" tabindex="-1" aria-labelledby="contModalLabel" aria-hidden="true" data-backdrop="static">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">
+
+        <b> Terms and Conditions</b>
+
+        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">x
+        </button>
+
+      </div>
+      <div class="modal-body" style="height:600px; overflow: auto;">
+        <div class="col-lg-12">
+          <div class="row justify-content-center">
+            <span class="terms" style="padding-left: 33%;"><b> Terms and Conditions for Cancellation of Product</b></span><br>
+            <span class="terms">By submitting this Cancellation Request Form (“CRF”) to Swickard Auto Group, its
+              affiliates, or its subsidiaries (the “Company”), you acknowledge and agree to the following: </span>
+            <p class="terms"> <span><b>Original Cancellation Terms.</b>
+                You agree and acknowledge that you (i) reviewed your original contract, (ii) read and understood all
+                contents of the original contract including all provisions regarding cancellation, (iii) understand all
+                obligations, terms, and conditions of cancellation and the ramifications of submitting this CRF, and
+                (iv) will abide by and follow all terms and requirements outlined in the original contract regarding the
+                cancellation of the product which you are intending to cancel by submitting this CRF. In the event of
+                any conflict between these terms and conditions, the terms and conditions of your original contract
+                control and supersede anything to the contrary herein. Please refer to your original contract for any
+                state specific provisions which supersede the terms herein. </span></p>
+            <p class="terms"> <span><b>Process.</b>
+                You understand and agree that Company is merely a transmitter of your cancellation request and that
+                Company does not have any liability or responsibility for the completion of your cancellation. Company
+                offers this CRF process as a matter of convenience and hereby disclaims and denies any recourse that you
+                may have to Company for any failure or delay impacting your cancellation whatsoever. Your recourse is
+                solely to the provider of your original contract. You understand and agree that the original contract
+                holder may deduct a fee from the cancellation refund, if any, owed to you or your lienholder and that if
+                the fee is greater than the refund amount, you will not receive any refund. You understand and agree
+                that once cancelled, you may not be able to reinstate or transfer your original contract. </span></p>
+            <p class="terms"> <span>
+                You understand that the cancellation process may take, on average, 45 days to
+                complete, and you agree and understand that submission of the cancellation will result in cancellation
+                of the service product from the time of submission, not the time of completion of the cancellation
+                process.<b> <u>You agree and understand that you will no longer have access to the service product once
+                    the
+                    CRF is submitted through the electronic form.</u></b> Once processed the refund, if any is
+                determined to be
+                owed, will be paid first to any lienholder. You agree and acknowledge that any payment to the lienholder
+                will be applied under the terms of your arrangement with the lienholder. You understand that the refund
+                may be prorated, and any refund will be less the amount of any claims due to be paid or paid on your
+                behalf. You understand and acknowledge that additional documentation may be required to proceed with
+                your cancellation. If additional documentation is required, you will be notified within 45 days.
+                 If additional documentation is required, the estimated time for processing is an additional
+                 45 days from submission of the additional documentation.</span></p>
+            <!-- <p class="terms"> <span><b>Expediting Processing.</b>
+                If you select Expedited Processing, you understand and agree that a $150.00 fee will be withheld from
+                any refund payment whether to you or your lienholder. You further agree and acknowledge that the
+                expedited processing fee is an additional service which you are purchasing from Company separate from
+                and entirely independent of your original contract, service contract, or any other agreement or
+                arrangement. You agree that the Expedited Processing is not guaranteed to deliver your refund to you or
+                your lienholder within any timeframe. The Expedited Processing fee estimates that the refund process may
+                be completed as quickly as seven (7) to ten (10) days, but processing may take longer. Delays in
+                delivery of funds are not included in the estimated processing time. The estimated time for processing
+                does not include any additional time for delivery of funds, including electronic ACH funds transfer.
+              </span></p> -->
+            <p class="terms"> <span><b>Indemnity.</b>
+                In consideration of the agreement by Company to act upon the CRF instructions in the manner provided in
+                these Terms and Conditions, you agree to indemnify and hold Company harmless from and against any and
+                all claims, suits, judgments, executions, liabilities, losses, damages, costs, and expenses–including
+                reasonable attorney’s fees–in connection with or arising out of Company acting upon those CRF
+                instructions pursuant to these Terms and Conditions. This indemnity will be effective to relieve and
+                indemnify Company against its negligence or misconduct. </span></p>
+            <br><br>
+            <span class="terms" style="padding-left: 33%;"><b> Terms and Conditions for Funds Transfers</b></span><br><br>
+            <span class="terms"> By requesting a funds transfer order with Swickard Auto Group, its affiliates, or its
+              subsidiaries (the “Company”), you agree to the following: </span>
+            <p class="terms"> <span><b>Reliance by Company.</b>
+                Company may rely on the information on the form received by it in making your funds transfer. Any errors
+                in the information, including misidentification of Beneficiary(ies), Recipient(s), incorrect or
+                inconsistent account names and numbers, identifying numbers of the intermediary bank or Beneficiary
+                Bank, and misspellings, are your responsibility. If you identify a Beneficiary or other entity by name
+                and account or any other number, payment may be made on the basis of the number and your payment will be
+                final even if the number you provided does not correspond to your Beneficiary or other entity that you
+                have identified. </span></p>
+            <p class="terms"> <span> <b> Bank Fees.</b></span><span> Your financial institution may be authorized to
+                debit your account for any fees, costs, or charges related to your funds transfer order. You may have
+                further authorized your financial institution to charge your account a service fee for each funds
+                transfer order you place in accordance with its fee schedule in effect from time to time </span></p>
+            <p class="terms"> <span> <b> Transfer of Beneficiary Bank.</b></span><span> When you place an order with
+                Company for a funds transfer, you must select a financial institution as the Beneficiary Bank for the
+                transfer. For transfers within the United States, the Beneficiary Bank must be a member of the Federal
+                Reserve System or a correspondent bank of such a member, or a Clearing House Interbank Payment System
+                (CHIPS) member. You may request that the funds be deposited to a particular account at the Beneficiary
+                Bank. The Beneficiary Bank will be responsible for following your instructions and for notifying the
+                Beneficiary that the funds are available. After the funds are transferred to the Beneficiary Bank, they
+                become the property of the Beneficiary Bank. The Beneficiary Bank is responsible to locate, identify,
+                and make payment to your Beneficiary. If your Beneficiary cannot be properly identified, the funds may
+                be returned. </span></p>
+            <p class="terms"> <span> <b> Currency of Transfer.</b></span> <span> Funds transfers to beneficiaries within
+                the United States are made only in U.S. dollars. International Funds transfers cannot be accommodated.
+              </span></p>
+            <p class="terms"> <span> <b> Means of Transfer.</b></span> <span> Company uses a variety of banking channels
+                and facilities to make funds transfers but will ordinarily use electronic means. The Company may choose
+                any conventional means that the Company considers suitable to transfer your funds to your Beneficiary.
+                Because the Company does not maintain banking relations with every bank, the Company sometimes uses one
+                or more intermediary banks to transfer your funds to the Beneficiary Bank. After the Company transmits
+                your order to an intermediary bank, that bank is responsible to complete your order. </span></p>
+            <p class="terms"> <span><b> Recalls/Amendments.</b></span> <span>You are not able to recall or amend your
+                funds transfer order. Company will not be liable to you for any loss resulting from any inability to
+                recall or amend your funds transfer order. </span></p>
+            <p class="terms"> <span> <b> Rejection of an Order.</b></span> <span> The Company reserve the right to
+                reject your funds transfer order. The Company may reject your order if you have insufficient
+                information, the order does not comply with applicable laws, the order is inconsistent with rules and
+                regulations of the financial institutions involved, if your order is incomplete or unclear, or if the
+                Company is unable to fulfill your order for any other reason including but not limited to force majeure
+                events. </span></p>
+            <p class="terms"> <span><b>Delays, Non-Execution of Funds Transfer Order.</b></span> <span> While the
+                Company will handle your funds transfer order as expeditiously as possible, you agree that Company will
+                not be responsible for any delay, failure to execute, or mis-execution of your order due to
+                circumstances beyond Company’s reasonable anticipation or control– including without limitations any
+                inaccuracy, interruption, delay in transmission, or failure in the means of transmission, whether caused
+                by strikes, power failures, equipment malfunctions, or acts or omissions of any intermediary bank or
+                Beneficiary Bank. Company MAKES NO WARRANTIES, EXPRESS OR IMPLIED–INCLUDING THE FAILURE OF ANY
+                INTERMEDIARY BANK OR Beneficiary BANK TO CREDIT YOUR Beneficiary WITH THE AMOUNT OF THE FUNDS TRANSFER
+                AFTER RECEIPT OF SAME WITH RESPECT TO ANY MATTER. </span></p>
+            <p class="terms"> <span> <b> Claims.</b></span><span> You agree that within ninety (90) days after you
+                receive notification that your funds transfer order has been executed, you will tell Company of any
+                errors, delays or other problems related to your order. Company will determine whether an error occurred
+                within 90 days after you contact Company and any error will be corrected promptly. If Company decides
+                there was no error, a written explanation will be sent to you. If your funds transfer order is delayed
+                or erroneously executed as a result of Company’s error, Company’s sole obligation to you is to pay via
+                check such amounts as may be required by applicable law. In no event shall Company be responsible for
+                any consequential or incidental damages or expenses in connection with your order. No interest will be
+                payable by Company under any circumstances. In any event, if you fail to notify Company of any claim
+                concerning your funds transfer order within ninety (90) days from the date that you receive notification
+                that your order has been executed, any claim by you will be barred under applicable law. </span></p>
+            <p class="terms"> <span><b> Governing Law.</b> </span><span>The Agreement will be governed by the laws of
+                the state of Oregon which is the location through which you initiated this funds transfer and United
+                States federal law as applicable. </span></p>
+            <p class="terms"> <span> <b> Indemnity.</b></span> <span> In consideration of the agreement by Company to
+                act upon funds transfer instructions in the manner provided in this Agreement, you agree to indemnify
+                and hold Company harmless from and against any and all claims, suits, judgments, executions,
+                liabilities, losses, damages, costs, and expenses–including reasonable attorney’s fees–in connection
+                with or arising out of Company acting upon those funds transfer instructions pursuant to this Agreement.
+                This indemnity will be effective to relieve and indemnify Company against its negligence or
+                misconduct</span></p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<button id="warningbtn" [hidden]='true' data-bs-toggle="modal" data-bs-target="#warningmessage" ></button>
+<button id="achvalidation" [hidden]='true' data-bs-toggle="modal" data-bs-target="#achvalidations" > </button>
+<button id="validation" [hidden]='true' data-bs-toggle="modal" data-bs-target="#validations" > </button>
+<button id="confirm" [hidden]='true' data-bs-toggle="modal" data-bs-target="#Confirmationalert" > </button>
+
+

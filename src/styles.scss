@@ -1,0 +1,295 @@
+/* You can add global styles to this file, and also import other style files */
+/* You can add global styles to this file, and also import other style files */
+/* You can add global styles to this file, and also import other style files */
+// @import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
+// @import "../node_modules/alertifyjs/build/css/alertify.min.css";
+// @import "../node_modules/alertifyjs/build/css/themes/bootstrap.min.css";
+@font-face {
+    font-family: 'HelveticaNeue-Regular';
+    src: url('assets/fonts/HelveticaNeue-Regular.otf') format('otf'), /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+         url('assets/fonts/HelveticaNeue-Regular.otf') format('opentype'); /* Chrome 4+, Firefox 3.5, Opera 10+, Safari 3—5 */
+  }
+  @font-face {
+    font-family: 'HelveticaNeue-Light';
+    src: url('assets/fonts/HelveticaNeue-Light.otf') format('otf'), /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+         url('assets/fonts/HelveticaNeue-Light.otf') format('opentype'); /* Chrome 4+, Firefox 3.5, Opera 10+, Safari 3—5 */
+  }
+  @font-face {
+    font-family: 'HelveticaNeue-Medium';
+    src: url('assets/fonts/HelveticaNeue-Medium.otf') format('otf'), /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+         url('assets/fonts/HelveticaNeue-Medium.otf') format('opentype'); /* Chrome 4+, Firefox 3.5, Opera 10+, Safari 3—5 */
+  }
+  @font-face {
+    font-family: 'HelveticaNeue-Bold';
+    src: url('assets/fonts/HelveticaNeue-Bold.otf') format('otf'), /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+         url('assets/fonts/HelveticaNeue-Bold.otf') format('opentype'); /* Chrome 4+, Firefox 3.5, Opera 10+, Safari 3—5 */
+  }
+  @font-face {
+    font-family: 'Gotham\ Book\ Regular';
+    src: url('assets/fonts/Gotham\ Book\ Regular.otf') format('otf'), /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+         url('assets/fonts/Gotham\ Book\ Regular.otf') format('opentype'); /* Chrome 4+, Firefox 3.5, Opera 10+, Safari 3—5 */
+  }
+  @font-face {
+    font-family: 'GothamMedium';
+    src: url('assets/fonts/GothamMedium.ttf') format('ttf'), /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+         url('assets/fonts/GothamMedium.ttf') format('truetype'); /* Chrome 4+, Firefox 3.5, Opera 10+, Safari 3—5 */
+  }
+  @font-face {
+    font-family: 'Gotham\ Bold';
+    src: url('assets/fonts/Gotham\ Bold.otf') format('otf'), /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+         url('assets/fonts/Gotham\ Bold.otf') format('opentype'); /* Chrome 4+, Firefox 3.5, Opera 10+, Safari 3—5 */
+  }
+  @font-face {
+    font-family: 'Gotham-Light';
+    src: url('assets/fonts/Gotham-Light.ttf') format('ttf'), /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+         url('assets/fonts/Gotham-Light.ttf') format('truetype'); /* Chrome 4+, Firefox 3.5, Opera 10+, Safari 3—5 */
+  }
+  
+  body{margin: 0;padding: 0; border: 0; background: url(./assets/images/axel_bg.jpg) round; color: #000; text-rendering: optimizeLegibility !important; font-size: 12px; font-family: 'HelveticaNeue-Regular';}
+  
+  // body{
+  //   background: url(../../assets/images/axel_bg.jpg);
+  // }
+  /*
+  * Sidebar
+  */
+  
+  .sidebar {
+    position: fixed;
+    top: 0;
+    background: #111422;
+    overflow-x: hidden;
+    overflow-y: auto;
+    bottom: 0;
+    left: 0;
+    z-index: 100; 
+    margin: 67px 0 0;
+    box-shadow: inset -1px 0 0 rgba(0, 0, 0, .1);
+  }
+  
+  
+  .sidebar-sticky {
+    position: relative;
+    top: 0;
+    height: calc(100vh - 67px);
+    padding-top: .5rem;
+    overflow-x: hidden;
+    overflow-y: auto; 
+  }
+  
+  .sidebar .nav-link {
+    font-weight: 500;
+    font-size:1rem;
+    color: #7a7a7d;
+  }
+  
+  .sidebar .nav-link .feather {
+    margin-right: 5px;
+  }
+  
+  .sidebar .nav-link.active {
+    color: #ffffff;
+  }
+  
+  .sidebar .nav-link:hover .feather,
+  .sidebar .nav-link.active .feather {
+    color: inherit;
+  }
+  
+  .sidebar-heading {
+    font-size: .75rem;
+    text-transform: uppercase;
+  }
+  .sidebar .child{list-style: none;
+    padding-left: 0;}  
+  .sidebar .child li{padding: 5px;color: #7a7a7d;}
+  .sidebar .child li:hover,.sidebar .child li.activeClass {white-space:nowrap;background: #3c5ad3 ;color: #ffffff; width: 85%; border-radius: 0 20px 20px 0; cursor: pointer;}
+  .sidebar .child a{ padding-left: 36px;  }
+  .nav-link {padding: 0.5rem .8rem !important;}
+  
+  @media (max-width: 767.98px) {
+    .sidebar {
+      top: 5rem;
+    }
+  }
+  
+  
+  .store_name{
+    text-align: left;
+  }
+  
+  .store_ttl{
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    font-family: 'HelveticaNeue-Medium';
+  }
+  
+  .store_val{
+    font-size: 1.5rem;
+    font-family: 'HelveticaNeue-Regular';
+  }
+  
+  
+  
+  h2 {
+    font-size: 1rem;
+    text-align: center;
+    color: white;
+    text-transform: uppercase;
+  }
+  
+  h2.ttl-sales {
+    position: relative;
+    z-index: 1;
+    &:before {
+        border-top: 2px solid white;
+        content:"";
+        margin: 0 auto;
+        position: absolute;
+        top: 50%; left: 0; right: 0; bottom: 0;
+        width: 100%;
+        z-index: -1;
+    }
+  
+    span { 
+        background: #3760d4; 
+        padding: 0 15px; 
+    }
+  }
+  
+  h2.double:before { 
+    border-top: none; 
+  }
+  
+  .stor_headng{margin-top: -75px;
+    .column1 {
+        float: left;
+        width: 21%;
+    }
+    
+    .column2 {
+        float: left;
+        width: 39.5%;
+    }
+    
+    .column3 {
+        float: left;
+        width: 39.5%;
+    }
+  
+    .column4 {
+      float: left;
+      width: 80%;
+  }
+   
+  }
+  
+  
+  /*Top color*/
+  .top_bg{
+    width: 100%;
+    background-image: linear-gradient(to right, #4a42d4 , #267fd3);
+    color: #ffffff; padding: 10px 20px 95px;
+  }
+  ._dropdwn {
+    float: left;
+    padding: 0 15px 0 10px;
+    overflow: hidden;
+   // background: url(assets/images/Arrow_dwn.png) #5957d7 95% no-repeat;
+  }
+  ._dropdwn select option {
+    background: #ccc!important;
+    color: #333;
+    text-transform: uppercase;
+  }
+  ._dropdwn,._dropdwn select {
+    outline: none;
+    border: none;
+    width: 150px;
+    height: 25px;
+    font-size: .8rem;
+    font-family: 'HelveticaNeue-Regular';
+    color: #ffffff;
+    text-transform: uppercase;
+    appearance: none;
+    -moz-appearance: none;
+    -webkit-appearance: none
+  }
+  
+  
+  
+  // ._dropdwn {
+    
+  //   float: left;
+  //   padding: 0 15px 0 5px;
+  //   overflow: hidden;
+  //   background: url(assets/images/Arrow_dwn.png) 100% no-repeat;
+   
+  // }
+  
+  // ._dropdwn,._dropdwn select {
+  //   outline: none;
+  //   border: none;
+  //   width: 100%;
+  //   height: 25px;
+  //   font-size: .8rem;
+  //   font-family: 'HelveticaNeue-Regular';
+  //   color: #ffffff;
+  //   text-transform: uppercase;
+  //   appearance: none;
+  //   -moz-appearance: none;
+  //   -webkit-appearance: none
+  // }
+  
+  
+  // ._dropdwn select option {
+  //   background: #ccc!important;
+  //   color: #333;
+  //   text-transform: uppercase;
+  // }
+  .sidebar::-webkit-scrollbar {
+    width: 5px; border-radius: 10px; background: #aaa;
+  }
+  .sidebar ::-webkit-scrollbar-track {
+    background: #f1f1f1;
+  }
+  .sidebar::-webkit-scrollbar-thumb {
+    background-color: #3c5ad3;
+  }
+  .table > :not(caption) > * > *{/*vertical-align: middle;*/box-shadow:none !important; padding: .3rem .5rem;}
+  
+  ::-webkit-scrollbar {
+  
+    width: 5px; height: 10px;    border-radius: 10px; }
+  
+  ::-webkit-scrollbar-track {
+  
+    background: #ccc;border-radius: 10px;}
+  
+  ::-webkit-scrollbar-thumb {
+  
+    background-color: #3c5ad3;
+  
+    width: 5px !important;border-radius: 10px;
+  
+  }
+  
+  
+  @media screen and(min-width: 576px){
+
+    // .modal-dialog{max-width: 75% !important;}
+  
+    // .modal-body{height:600px; overflow: auto;}
+    .modal.show .modal-dialog {
+      transform: none;
+      margin-top:60px
+  }
+  
+  }
+  
+  
+  @media screen and(max-width: 767.98px){
+    .table > :not(caption) > * > *{vertical-align: middle;}
+  }
+/* Importing Bootstrap SCSS file. */
+ @import '~bootstrap/scss/bootstrap';
